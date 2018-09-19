@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RedditOnRails</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <% if logged_in? %>
+  <h2>Welcome back, <%= current_user.username %></h2>
+  <form class="" action="<%= session_url %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <%= auth_token %>
+    <input type="submit" name="" value="Sign Out">
+  </form>
+  <% end %>
+  <ul>
+    <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+        <br>
+        <% end %>
+      <% end %>
+  </ul>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
